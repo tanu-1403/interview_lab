@@ -1,0 +1,27 @@
+2026-04-12 07:57:47,741 | INFO | CPA_AI | 🏭 CPAPipeline initialized with all 7 agents.
+2026-04-12 07:57:53,191 | WARNING | CPA_AI | LLM call attempt 1 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 07:57:53,273 | WARNING | CPA_AI | LLM call attempt 2 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 07:57:53,334 | WARNING | CPA_AI | LLM call attempt 3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 07:57:53,350 | ERROR | CPA_AI | All LLM retries exhausted.
+2026-04-12 07:58:51,233 | WARNING | CPA_AI | LLM call attempt 1 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 07:58:51,281 | WARNING | CPA_AI | LLM call attempt 2 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 07:58:51,329 | WARNING | CPA_AI | LLM call attempt 3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 07:58:51,334 | ERROR | CPA_AI | All LLM retries exhausted.
+2026-04-12 08:00:27,782 | INFO | CPA_AI | 🏭 CPAPipeline initialized with all 7 agents.
+2026-04-12 08:00:30,939 | WARNING | CPA_AI | LLM call attempt 1 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:00:30,991 | WARNING | CPA_AI | LLM call attempt 2 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:00:31,030 | WARNING | CPA_AI | LLM call attempt 3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:00:31,035 | ERROR | CPA_AI | All LLM retries exhausted.
+2026-04-12 08:01:19,539 | WARNING | CPA_AI | LLM call attempt 1 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:01:19,583 | WARNING | CPA_AI | LLM call attempt 2 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:01:19,629 | WARNING | CPA_AI | LLM call attempt 3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:01:19,633 | ERROR | CPA_AI | All LLM retries exhausted.
+2026-04-12 08:05:07,248 | INFO | CPA_AI | 🏭 CPAPipeline initialized with all 7 agents.
+2026-04-12 08:05:12,454 | WARNING | CPA_AI | LLM call attempt 1 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:05:12,514 | WARNING | CPA_AI | LLM call attempt 2 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:05:12,565 | WARNING | CPA_AI | LLM call attempt 3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:05:12,572 | ERROR | CPA_AI | All LLM retries exhausted.
+2026-04-12 08:05:59,560 | WARNING | CPA_AI | LLM call attempt 1 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:05:59,602 | WARNING | CPA_AI | LLM call attempt 2 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:05:59,642 | WARNING | CPA_AI | LLM call attempt 3 failed: Error code: 404 - {'error': {'message': 'No endpoints found for mistralai/mistral-7b-instruct:free.', 'code': 404}, 'user_id': 'user_3CEmoYcQGh3OfUkjUQB2zrDnS2o'}
+2026-04-12 08:05:59,646 | ERROR | CPA_AI | All LLM retries exhausted.
