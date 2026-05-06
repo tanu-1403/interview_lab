@@ -102,6 +102,8 @@ python run_pipeline.py --data data/sales.xlsx --output outputs/
 ```bash
 SALEPULSE_DATA=data/sales.xlsx uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+👉 Once running, open the interactive API at:
+**http://127.0.0.1:8000/docs**
 
 ---
 
