@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.env
+.venv
+env/
+venv/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data (large files)
+data/raw/*.tif
+data/raw/*.nc
+data/raw/*.h5
+data/outputs/_gif_frames/
+
+# Models (large)
+data/outputs/*.pkl
+data/outputs/*.h5
+
+# Credentials
+.env
+secrets.json
+service_account.json
+ee_credentials.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# LaTeX
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.synctex.gz
+report/*.bbl
+report/*.blg
+report/_minted*/
+
+# Keep these
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/outputs/.gitkeep

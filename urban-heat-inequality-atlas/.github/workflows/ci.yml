@@ -1,0 +1,51 @@
+name: Urban Heat Atlas — CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run data generation
+        run: python run_pipeline.py --steps 1,2,3,4 --skip-models
+
+      - name: Run clustering
+        run: python run_pipeline.py --steps 5
+
+      - name: Run visualizations
+        run: python run_pipeline.py --steps 9
+
+      - name: Check outputs exist
+        run: |
+          test -f data/processed/features_final.geojson
+          test -f data/outputs/tii_choropleth.html
+          echo "✅ All required outputs present"
+
+      - name: Upload outputs
+        uses: actions/upload-artifact@v3
+        with:
+          name: heat-atlas-outputs
+          path: data/outputs/
+          retention-days: 7

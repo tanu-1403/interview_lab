@@ -1,0 +1,52 @@
+[
+  {
+    "case": "CASE-001",
+    "ward": "Limbayat",
+    "lst": 40.783599853515625,
+    "ndvi": 0.019030093029141427,
+    "income": 13615.0,
+    "tii": 100.0,
+    "anomaly_score": 1.0,
+    "reason": "Near-zero vegetation in a zone with moderate income \u2014 recent construction?"
+  },
+  {
+    "case": "CASE-002",
+    "ward": "Udhna",
+    "lst": 40.70225715637207,
+    "ndvi": 0.022464853804558517,
+    "income": 13311.0,
+    "tii": 99.5,
+    "anomaly_score": 0.9416046895178574,
+    "reason": "Near-zero vegetation in a zone with moderate income \u2014 recent construction?"
+  },
+  {
+    "case": "CASE-003",
+    "ward": "Udhna",
+    "lst": 38.84989929199219,
+    "ndvi": 0.03660396672785282,
+    "income": 37296.0,
+    "tii": 78.66,
+    "anomaly_score": 0.8379519921289011,
+    "reason": "Near-zero vegetation in a zone with moderate income \u2014 recent construction?"
+  },
+  {
+    "case": "CASE-004",
+    "ward": "Limbayat",
+    "lst": 39.408207702636716,
+    "ndvi": 0.035023826733231546,
+    "income": 26071.0,
+    "tii": 94.78,
+    "anomaly_score": 0.7394740072540942,
+    "reason": "Near-zero vegetation in a zone with moderate income \u2014 recent construction?"
+  },
+  {
+    "case": "CASE-005",
+    "ward": "Salabatpura",
+    "lst": 37.11785697937012,
+    "ndvi": 0.0763336405158043,
+    "income": 43452.0,
+    "tii": 68.33,
+    "anomaly_score": 0.7382792942856926,
+    "reason": "Near-zero vegetation in a zone with moderate income \u2014 recent construction?"
+  }
+]

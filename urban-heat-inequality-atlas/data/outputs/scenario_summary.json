@@ -1,0 +1,42 @@
+{
+  "do_nothing": {
+    "scenario_name": "Business As Usual (2035)",
+    "description": "Current trends continue. Urban expansion, minimal green investment.",
+    "mean_lst_2035": 37.57,
+    "mean_tii_2035": 45.64,
+    "delta_lst": 4.71,
+    "delta_tii": 2.81,
+    "n_improved": 6,
+    "n_worsened": 5
+  },
+  "moderate_intervention": {
+    "scenario_name": "Moderate Green Plan (2035)",
+    "description": "10% more canopy city-wide, cool pavement pilots in top-10 TII zones.",
+    "mean_lst_2035": 30.85,
+    "mean_tii_2035": 41.66,
+    "delta_lst": -2.01,
+    "delta_tii": -1.17,
+    "n_improved": 100,
+    "n_worsened": 0
+  },
+  "ambitious_green": {
+    "scenario_name": "Ambitious Green City (2035)",
+    "description": "+25% canopy, cool roofs on 40% of buildings, urban forest corridors.",
+    "mean_lst_2035": 25.1,
+    "mean_tii_2035": 39.45,
+    "delta_lst": -7.76,
+    "delta_tii": -3.38,
+    "n_improved": 100,
+    "n_worsened": 0
+  },
+  "justice_first": {
+    "scenario_name": "Equity-Targeted Intervention (2035)",
+    "description": "Same total resources \u2014 but targeted to top-20 TII zones only.",
+    "mean_lst_2035": 31.53,
+    "mean_tii_2035": 39.85,
+    "delta_lst": -1.34,
+    "delta_tii": -2.98,
+    "n_improved": 38,
+    "n_worsened": 79
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "lst_zscore_norm": 0.24676084518432617,
+  "ndvi_deficit_norm": 0.4146018326282501,
+  "income_vuln_norm": 0.09435444325208664,
+  "cooling_gap_norm": 0.07194845378398895,
+  "elderly_share_norm": 0.034335289150476456,
+  "thermal_persistence": 0.00454935384914279,
+  "heat_poverty_interaction": 0.1334497481584549
+}
