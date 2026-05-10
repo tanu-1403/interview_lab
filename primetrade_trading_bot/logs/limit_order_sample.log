@@ -1,0 +1,5 @@
+2025-05-08 12:03:15 | INFO     | cli          | CLI request | symbol=BTCUSDT side=SELL type=LIMIT qty=0.01 price=97000.0 stop=None
+2025-05-08 12:03:15 | INFO     | orders       | Placing LIMIT SELL | symbol=BTCUSDT qty=0.01 price=97000.0 tif=GTC
+2025-05-08 12:03:15 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': 0.01, 'price': 97000.0, 'timeInForce': 'GTC'}
+2025-05-08 12:03:16 | DEBUG    | client       | Response [200]: {"orderId":3917902,"symbol":"BTCUSDT","status":"NEW","side":"SELL","type":"LIMIT","origQty":"0.01","executedQty":"0","avgPrice":"0","price":"97000.00","timeInForce":"GTC","updateTime":1746700996000}
+2025-05-08 12:03:16 | INFO     | orders       | LIMIT order OK | orderId=3917902 symbol=BTCUSDT side=SELL status=NEW origQty=0.01 executedQty=0 avgPrice=N/A

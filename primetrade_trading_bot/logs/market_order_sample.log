@@ -1,0 +1,5 @@
+2025-05-08 12:00:01 | INFO     | cli          | CLI request | symbol=BTCUSDT side=BUY type=MARKET qty=0.01 price=None stop=None
+2025-05-08 12:00:01 | INFO     | orders       | Placing MARKET BUY | symbol=BTCUSDT qty=0.01
+2025-05-08 12:00:01 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.01}
+2025-05-08 12:00:02 | DEBUG    | client       | Response [200]: {"orderId":3917648,"symbol":"BTCUSDT","status":"FILLED","side":"BUY","type":"MARKET","origQty":"0.01","executedQty":"0.01","avgPrice":"95230.50000","price":"0","timeInForce":"GTC","updateTime":1746700802000}
+2025-05-08 12:00:02 | INFO     | orders       | MARKET order OK | orderId=3917648 symbol=BTCUSDT side=BUY status=FILLED origQty=0.01 executedQty=0.01 avgPrice=95230.50000

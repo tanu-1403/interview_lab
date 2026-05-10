@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Binance Futures Testnet Bot</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --card: #1f2235;
+    --border: rgba(255,255,255,.08); --text: #e8eaf0; --muted: #8892a4;
+    --purple: #7c6aff; --purple-dim: rgba(124,106,255,.15);
+    --green: #22c55e; --red: #ef4444; --amber: #f59e0b; --blue: #3b82f6;
+    --radius: 12px; --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size: 14px; min-height: 100vh; }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; position: sticky; top: 0; z-index: 10;
+  }
+  .logo { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; letter-spacing: -.3px; }
+  .logo-icon { width: 32px; height: 32px; background: var(--purple-dim); border: 1px solid rgba(124,106,255,.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .testnet-badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; background: rgba(245,158,11,.12); color: var(--amber); border: 1px solid rgba(245,158,11,.25); font-weight: 600; letter-spacing: .04em; }
+  .conn-pill { font-size: 11px; padding: 4px 12px; border-radius: 20px; background: rgba(34,197,94,.1); color: var(--green); border: 1px solid rgba(34,197,94,.2); display: flex; align-items: center; gap: 6px; }
+  .conn-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 28px 20px; display: grid; grid-template-columns: 1fr 360px; gap: 20px; }
+
+  /* metric strip */
+  .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; grid-column: 1/-1; }
+  .metric { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+  .metric-label { font-size: 11px; color: var(--muted); margin-bottom: 8px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+  .metric-val { font-size: 26px; font-weight: 700; letter-spacing: -.5px; }
+  .metric-sub { font-size: 12px; margin-top: 5px; }
+
+  /* card */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; }
+  .card-title { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .card-title i { font-size: 15px; }
+
+  /* form */
+  .field { margin-bottom: 12px; }
+  label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; font-weight: 500; }
+  input, select { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); padding: 9px 12px; font-size: 13px; outline: none; transition: border-color .15s, box-shadow .15s; }
+  input:focus, select:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(124,106,255,.12); }
+  input::placeholder { color: var(--muted); }
+  select option { background: #1a1d27; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* segmented control */
+  .seg { display: flex; background: var(--surface); border-radius: var(--radius-sm); border: 1px solid var(--border); overflow: hidden; margin-bottom: 14px; }
+  .seg-btn { flex: 1; padding: 9px; font-size: 13px; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--muted); transition: all .15s; }
+  .seg-btn.buy.active { background: rgba(34,197,94,.15); color: var(--green); }
+  .seg-btn.sell.active { background: rgba(239,68,68,.15); color: var(--red); }
+  .seg-btn:hover:not(.active) { color: var(--text); }
+
+  /* place button */
+  .place-btn { width: 100%; padding: 12px; border-radius: var(--radius-sm); border: none; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .18s; margin-top: 6px; letter-spacing: .02em; }
+  .place-btn.buy { background: var(--green); color: #fff; }
+  .place-btn.sell { background: var(--red); color: #fff; }
+  .place-btn:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+  .place-btn:active:not(:disabled) { transform: scale(.98); filter: none; }
+  .place-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* order table */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  th { text-align: left; font-size: 11px; color: var(--muted); font-weight: 600; padding: 7px 10px; border-bottom: 1px solid var(--border); letter-spacing: .05em; text-transform: uppercase; }
+  td { padding: 11px 10px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,.04); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.02); }
+
+  .badge { font-size: 11px; padding: 2px 9px; border-radius: 20px; font-weight: 600; }
+  .b-filled { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
+  .b-new { background: rgba(124,106,255,.12); color: #a89fff; border: 1px solid rgba(124,106,255,.2); }
+  .b-buy { color: var(--green); font-weight: 700; }
+  .b-sell { color: var(--red); font-weight: 700; }
+
+  /* log */
+  .log-area { font-family: 'Courier New',monospace; font-size: 12px; color: #7dd3a8; background: rgba(0,0,0,.35); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; height: 160px; overflow-y: auto; line-height: 1.75; }
+  .lt { color: var(--muted); }
+  .le { color: var(--red); }
+  .lw { color: var(--amber); }
+  .ls { color: var(--green); }
+
+  /* toast */
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 13px 18px; font-size: 13px; opacity: 0; transform: translateY(8px); transition: all .25s; pointer-events: none; z-index: 99; max-width: 340px; line-height: 1.4; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.ok { border-left: 3px solid var(--green); }
+  .toast.err { border-left: 3px solid var(--red); }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+  .price-up { color: var(--green); }
+  .price-dn { color: var(--red); }
+
+  .hint { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+    .metrics { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 480px) {
+    .metrics { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">⚡</div>
+    Futures Bot
+    <span class="testnet-badge">TESTNET</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span style="font-size:12px;color:var(--muted)" id="server-time"></span>
+    <div class="conn-pill"><div class="conn-dot"></div> Connected</div>
+  </div>
+</header>
+
+<main>
+  <!-- Metrics row (full width) -->
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">BTC / USDT</div>
+      <div class="metric-val" id="btc-price">$95,420</div>
+      <div class="metric-sub price-up" id="btc-chg">+1.23%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">ETH / USDT</div>
+      <div class="metric-val" id="eth-price">$3,210</div>
+      <div class="metric-sub price-up" id="eth-chg">+0.87%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Orders this session</div>
+      <div class="metric-val" id="order-count">0</div>
+      <div class="metric-sub" style="color:var(--muted)">via this dashboard</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Last order status</div>
+      <div class="metric-val" id="last-status" style="font-size:18px;margin-top:6px">—</div>
+      <div class="metric-sub" style="color:var(--muted)" id="last-id">awaiting first order</div>
+    </div>
+  </div>
+
+  <!-- Left column -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+
+    <!-- Order history -->
+    <div class="card">
+      <div class="card-title">📋 Order history</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th><th>Symbol</th><th>Side</th>
+              <th>Type</th><th>Qty</th><th>Price</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="order-tbody">
+            <tr><td colspan="7" style="color:var(--muted);text-align:center;padding:28px 0">
+              No orders yet — place one using the panel on the right →
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- API Log -->
+    <div class="card">
+      <div class="card-title">🖥 API log</div>
+      <div class="log-area" id="log-area"><span class="lt">[ready]</span> Bot initialized. Enter credentials and place an order.</div>
+    </div>
+
+  </div>
+
+  <!-- Right column -->
+  <div style="display:flex;flex-direction:column;gap:16px">
+
+    <!-- Order form -->
+    <div class="card">
+      <div class="card-title">⚡ Place order</div>
+
+      <div class="seg">
+        <button class="seg-btn buy active" id="btn-buy" onclick="setSide('BUY')">▲ Buy / Long</button>
+        <button class="seg-btn sell" id="btn-sell" onclick="setSide('SELL')">▼ Sell / Short</button>
+      </div>
+
+      <div class="field">
+        <label>Symbol</label>
+        <select id="sym">
+          <option>BTCUSDT</option>
+          <option>ETHUSDT</option>
+          <option>BNBUSDT</option>
+          <option>SOLUSDT</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Order type</label>
+        <select id="otype" onchange="typeChanged()">
+          <option value="MARKET">Market</option>
+          <option value="LIMIT">Limit</option>
+          <option value="STOP_MARKET">Stop Market</option>
+        </select>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Quantity</label>
+          <input type="number" id="qty" placeholder="0.001" step="0.001" min="0.001" />
+        </div>
+        <div class="field" id="tif-wrap">
+          <label>Time in force</label>
+          <select id="tif">
+            <option>GTC</option><option>IOC</option><option>FOK</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field" id="price-wrap" style="display:none">
+        <label>Limit price (USDT)</label>
+        <input type="number" id="limit-price" placeholder="95000" />
+      </div>
+
+      <div class="field" id="stop-wrap" style="display:none">
+        <label>Stop price (USDT)</label>
+        <input type="number" id="stop-price" placeholder="90000" />
+      </div>
+
+      <button class="place-btn buy" id="place-btn" onclick="placeOrder()">Place Buy Order</button>
+    </div>
+
+    <!-- Credentials -->
+    <div class="card">
+      <div class="card-title">🔑 API credentials</div>
+      <div class="field">
+        <label>API Key</label>
+        <input type="text" id="api-key" placeholder="Paste testnet API key..." />
+      </div>
+      <div class="field">
+        <label>API Secret</label>
+        <input type="password" id="api-secret" placeholder="Paste testnet secret..." />
+      </div>
+      <p class="hint">🔒 Keys are used only to sign requests client-side. They are never sent to any server other than Binance Testnet.</p>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BASE = "https://testnet.binancefuture.com";
+let side = "BUY";
+let orderCount = 0;
+
+// ── clock ──────────────────────────────────────────────────────────────
+function tick() {
+  document.getElementById("server-time").textContent =
+    new Date().toUTCString().slice(17,25) + " UTC";
+}
+tick(); setInterval(tick, 1000);
+
+// ── mock price ticker ─────────────────────────────────────────────────
+const btcBase = 95420, ethBase = 3210;
+function randomPrice(base, spread) {
+  return base + (Math.random() - 0.5) * spread;
+}
+function updateTicker() {
+  const btc = randomPrice(btcBase, 400);
+  const eth = randomPrice(ethBase, 60);
+  const btcChg = ((Math.random() - 0.45) * 3).toFixed(2);
+  const ethChg = ((Math.random() - 0.45) * 2).toFixed(2);
+
+  document.getElementById("btc-price").textContent = "$" + btc.toLocaleString("en-US", {maximumFractionDigits:0});
+  const bc = document.getElementById("btc-chg");
+  bc.textContent = (btcChg > 0 ? "+" : "") + btcChg + "%";
+  bc.className = "metric-sub " + (btcChg > 0 ? "price-up" : "price-dn");
+
+  document.getElementById("eth-price").textContent = "$" + eth.toLocaleString("en-US", {maximumFractionDigits:0});
+  const ec = document.getElementById("eth-chg");
+  ec.textContent = (ethChg > 0 ? "+" : "") + ethChg + "%";
+  ec.className = "metric-sub " + (ethChg > 0 ? "price-up" : "price-dn");
+}
+updateTicker(); setInterval(updateTicker, 3500);
+
+// ── UI helpers ────────────────────────────────────────────────────────
+function setSide(s) {
+  side = s;
+  document.getElementById("btn-buy").classList.toggle("active", s === "BUY");
+  document.getElementById("btn-sell").classList.toggle("active", s === "SELL");
+  const btn = document.getElementById("place-btn");
+  btn.className = "place-btn " + (s === "BUY" ? "buy" : "sell");
+  btn.textContent = "Place " + (s === "BUY" ? "▲ Buy" : "▼ Sell") + " Order";
+}
+
+function typeChanged() {
+  const t = document.getElementById("otype").value;
+  document.getElementById("price-wrap").style.display = t === "LIMIT" ? "block" : "none";
+  document.getElementById("stop-wrap").style.display = t === "STOP_MARKET" ? "block" : "none";
+  document.getElementById("tif-wrap").style.display = t === "LIMIT" ? "block" : "none";
+}
+
+function log(msg, cls = "") {
+  const area = document.getElementById("log-area");
+  const ts = new Date().toTimeString().slice(0,8);
+  area.innerHTML += `\n<span class="lt">[${ts}]</span> <span class="${cls}">${msg}</span>`;
+  area.scrollTop = area.scrollHeight;
+}
+
+function toast(msg, ok = true) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.className = "toast " + (ok ? "ok" : "err");
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 4000);
+}
+
+function addRow(o) {
+  const tb = document.getElementById("order-tbody");
+  if (tb.querySelector("td[colspan]")) tb.innerHTML = "";
+  const rawPrice = o.avgPrice && Number(o.avgPrice) > 0
+    ? "$" + Number(o.avgPrice).toLocaleString()
+    : o.price && Number(o.price) > 0
+      ? "$" + Number(o.price).toLocaleString()
+      : "Market";
+  const statusCls = o.status === "FILLED" ? "b-filled" : "b-new";
+  const sideCls = o.side === "BUY" ? "b-buy" : "b-sell";
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td style="font-family:monospace;font-size:12px;color:var(--muted)">${o.orderId}</td>
+    <td style="font-weight:600">${o.symbol}</td>
+    <td><span class="${sideCls}">${o.side}</span></td>
+    <td>${o.type}</td>
+    <td>${o.origQty}</td>
+    <td>${rawPrice}</td>
+    <td><span class="badge ${statusCls}">${o.status}</span></td>
+  `;
+  tb.prepend(row);
+}
+
+// ── signing ───────────────────────────────────────────────────────────
+async function sign(secret, message) {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw", enc.encode(secret),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, enc.encode(message));
+  return Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2,"0")).join("");
+}
+
+// ── place order ───────────────────────────────────────────────────────
+async function placeOrder() {
+  const apiKey = document.getElementById("api-key").value.trim();
+  const apiSecret = document.getElementById("api-secret").value.trim();
+  if (!apiKey || !apiSecret) { toast("Enter your API credentials first.", false); return; }
+
+  const sym = document.getElementById("sym").value;
+  const otype = document.getElementById("otype").value;
+  const qty = parseFloat(document.getElementById("qty").value);
+  const limitPrice = document.getElementById("limit-price").value;
+  const stopPrice = document.getElementById("stop-price").value;
+  const tif = document.getElementById("tif").value;
+
+  if (!qty || qty <= 0) { toast("Enter a valid quantity.", false); return; }
+  if (otype === "LIMIT" && !limitPrice) { toast("Limit price required for LIMIT orders.", false); return; }
+  if (otype === "STOP_MARKET" && !stopPrice) { toast("Stop price required for STOP_MARKET orders.", false); return; }
+
+  const params = { symbol: sym, side, type: otype, quantity: qty, timestamp: Date.now() };
+  if (otype === "LIMIT") { params.price = limitPrice; params.timeInForce = tif; }
+  if (otype === "STOP_MARKET") { params.stopPrice = stopPrice; }
+
+  const qs = new URLSearchParams(params).toString();
+  let signature;
+  try {
+    signature = await sign(apiSecret, qs);
+  } catch(e) {
+    toast("Signing failed: " + e.message, false);
+    return;
+  }
+  params.signature = signature;
+
+  const btn = document.getElementById("place-btn");
+  btn.disabled = true; btn.textContent = "Placing…";
+  log(`POST /fapi/v1/order → ${sym} ${side} ${otype} qty=${qty}`, "lw");
+
+  try {
+    const r = await fetch(BASE + "/fapi/v1/order", {
+      method: "POST",
+      headers: {
+        "X-MBX-APIKEY": apiKey,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(params).toString(),
+    });
+    const data = await r.json();
+
+    if (!r.ok) {
+      log(`Error [${data.code}]: ${data.msg}`, "le");
+      toast(`API error ${data.code}: ${data.msg}`, false);
+      document.getElementById("last-status").textContent = "FAILED";
+      document.getElementById("last-status").style.color = "var(--red)";
+      document.getElementById("last-id").textContent = `code ${data.code}`;
+    } else {
+      log(`OK → orderId=${data.orderId} status=${data.status} executedQty=${data.executedQty}`, "ls");
+      toast(`✓ Order placed! ID: ${data.orderId}`, true);
+      addRow(data);
+      orderCount++;
+      document.getElementById("order-count").textContent = orderCount;
+      const el = document.getElementById("last-status");
+      el.textContent = data.status;
+      el.style.color = data.status === "FILLED" ? "var(--green)" : "#a89fff";
+      document.getElementById("last-id").textContent = `#${data.orderId}`;
+    }
+  } catch(e) {
+    log("Network error: " + e.message, "le");
+    toast("Network error — check console for details.", false);
+  } finally {
+    btn.disabled = false;
+    setSide(side);
+  }
+}
+</script>
+</body>
+</html>

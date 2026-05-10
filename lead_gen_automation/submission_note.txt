@@ -1,0 +1,38 @@
+SUBMISSION NOTE — Lead Generation Automation
+============================================
+Applicant : [Your Name]
+Date      : 2025-05-09
+Position  : Python Automation Internship
+
+APPROACH
+--------
+The script follows a modular 4-stage pipeline: (1) Collect — fetches live
+nonprofit records from the Open Data Soft US-Nonprofits public API (no key
+required), with automatic fallback to a curated 30-entry seed dataset to
+guarantee >= 30 leads per run; (2) Enrich — generates info@<domain> contact
+emails by parsing website URLs, and constructs LinkedIn /company/ URLs from
+org name slugs; (3) Clean — strips whitespace, removes duplicates on
+Name+Location, fills gaps with "N/A", validates email format, and sorts
+by sector; (4) Export — writes a timestamped, colour-styled .xlsx workbook
+(Leads sheet + Summary sheet) to the output/ folder, with all events logged
+to logs/run.log.
+
+TOOLS USED
+----------
+  requests  — HTTP fetching from public API endpoint
+  pandas    — DataFrame manipulation, deduplication, cleaning
+  openpyxl  — Styled multi-sheet Excel workbook generation
+  schedule  — Recurring scheduler (--schedule N flag)
+  logging   — Timestamped execution log in logs/run.log
+
+BONUS FEATURES IMPLEMENTED
+--------------------------
+  1. Email format generation  (info@domain convention from website URL)
+  2. LinkedIn URL generation  (/company/<slug> from org name)
+  3. Scheduled automation     (python lead_scraper.py --schedule 24)
+
+HOW TO RUN
+----------
+  pip install -r requirements.txt
+  python lead_scraper.py              # one-shot run
+  python lead_scraper.py --schedule 6 # every 6 hours
