@@ -1,0 +1,67 @@
+2026-05-10 08:17:06 | DEBUG    | client       | GET https://testnet.binancefuture.com/fapi/v1/ping params={}
+2026-05-10 08:17:07 | DEBUG    | client       | Response [200]: {}
+2026-05-10 08:18:34 | INFO     | cli          | CLI request | symbol=BTCUSDT side=BUY type=MARKET qty=0.01 price=None stop=None
+2026-05-10 08:18:34 | INFO     | orders       | Placing MARKET BUY | symbol=BTCUSDT qty=0.01
+2026-05-10 08:18:34 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.01, 'timestamp': 1778381314994}
+2026-05-10 08:18:35 | DEBUG    | client       | Response [400]: {"code":-2019,"msg":"Margin is insufficient."}
+2026-05-10 08:18:35 | ERROR    | client       | API error -2019: Margin is insufficient.
+2026-05-10 08:18:35 | ERROR    | orders       | MARKET order FAILED | symbol=BTCUSDT side=BUY qty=0.01
+2026-05-10 08:18:35 | ERROR    | cli          | Order failed: [-2019] Margin is insufficient.
+2026-05-10 08:19:10 | INFO     | cli          | CLI request | symbol=BTCUSDT side=BUY type=MARKET qty=0.001 price=None stop=None
+2026-05-10 08:19:10 | INFO     | orders       | Placing MARKET BUY | symbol=BTCUSDT qty=0.001
+2026-05-10 08:19:10 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.001, 'timestamp': 1778381350509}
+2026-05-10 08:19:11 | DEBUG    | client       | Response [400]: {"code":-2019,"msg":"Margin is insufficient."}
+2026-05-10 08:19:11 | ERROR    | client       | API error -2019: Margin is insufficient.
+2026-05-10 08:19:11 | ERROR    | orders       | MARKET order FAILED | symbol=BTCUSDT side=BUY qty=0.001
+2026-05-10 08:19:11 | ERROR    | cli          | Order failed: [-2019] Margin is insufficient.
+2026-05-10 08:19:18 | INFO     | cli          | CLI request | symbol=BTCUSDT side=BUY type=MARKET qty=0.0001 price=None stop=None
+2026-05-10 08:19:18 | INFO     | orders       | Placing MARKET BUY | symbol=BTCUSDT qty=0.0001
+2026-05-10 08:19:18 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.0001, 'timestamp': 1778381358745}
+2026-05-10 08:19:19 | DEBUG    | client       | Response [400]: {"code":-4164,"msg":"Order's notional must be no smaller than 50 (unless you choose reduce only)."}
+2026-05-10 08:19:19 | ERROR    | client       | API error -4164: Order's notional must be no smaller than 50 (unless you choose reduce only).
+2026-05-10 08:19:19 | ERROR    | orders       | MARKET order FAILED | symbol=BTCUSDT side=BUY qty=0.0001
+2026-05-10 08:19:19 | ERROR    | cli          | Order failed: [-4164] Order's notional must be no smaller than 50 (unless you choose reduce only).
+2026-05-10 08:19:31 | INFO     | cli          | CLI request | symbol=BTCUSDT side=BUY type=MARKET qty=0.0001 price=None stop=None
+2026-05-10 08:19:31 | INFO     | orders       | Placing MARKET BUY | symbol=BTCUSDT qty=0.0001
+2026-05-10 08:19:31 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.0001, 'timestamp': 1778381371654}
+2026-05-10 08:19:33 | DEBUG    | client       | Response [400]: {"code":-4164,"msg":"Order's notional must be no smaller than 50 (unless you choose reduce only)."}
+2026-05-10 08:19:33 | ERROR    | client       | API error -4164: Order's notional must be no smaller than 50 (unless you choose reduce only).
+2026-05-10 08:19:33 | ERROR    | orders       | MARKET order FAILED | symbol=BTCUSDT side=BUY qty=0.0001
+2026-05-10 08:19:33 | ERROR    | cli          | Order failed: [-4164] Order's notional must be no smaller than 50 (unless you choose reduce only).
+2026-05-10 08:20:17 | INFO     | cli          | CLI request | symbol=DOGEUSDT side=BUY type=MARKET qty=100.0 price=None stop=None
+2026-05-10 08:20:17 | INFO     | orders       | Placing MARKET BUY | symbol=DOGEUSDT qty=100.0
+2026-05-10 08:20:17 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'DOGEUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 100.0, 'timestamp': 1778381417237}
+2026-05-10 08:20:18 | DEBUG    | client       | Response [400]: {"code":-2019,"msg":"Margin is insufficient."}
+2026-05-10 08:20:18 | ERROR    | client       | API error -2019: Margin is insufficient.
+2026-05-10 08:20:18 | ERROR    | orders       | MARKET order FAILED | symbol=DOGEUSDT side=BUY qty=100.0
+2026-05-10 08:20:18 | ERROR    | cli          | Order failed: [-2019] Margin is insufficient.
+2026-05-10 08:20:26 | INFO     | cli          | CLI request | symbol=XRPUSDT side=BUY type=MARKET qty=50.0 price=None stop=None
+2026-05-10 08:20:26 | INFO     | orders       | Placing MARKET BUY | symbol=XRPUSDT qty=50.0
+2026-05-10 08:20:26 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'XRPUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 50.0, 'timestamp': 1778381426222}
+2026-05-10 08:20:27 | DEBUG    | client       | Response [400]: {"code":-2019,"msg":"Margin is insufficient."}
+2026-05-10 08:20:27 | ERROR    | client       | API error -2019: Margin is insufficient.
+2026-05-10 08:20:27 | ERROR    | orders       | MARKET order FAILED | symbol=XRPUSDT side=BUY qty=50.0
+2026-05-10 08:20:27 | ERROR    | cli          | Order failed: [-2019] Margin is insufficient.
+2026-05-10 08:21:06 | INFO     | cli          | CLI request | symbol=BTCUSDT side=BUY type=MARKET qty=0.01 price=None stop=None
+2026-05-10 08:21:06 | INFO     | orders       | Placing MARKET BUY | symbol=BTCUSDT qty=0.01
+2026-05-10 08:21:06 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.01, 'timestamp': 1778381466029}
+2026-05-10 08:21:07 | DEBUG    | client       | Response [400]: {"code":-2019,"msg":"Margin is insufficient."}
+2026-05-10 08:21:07 | ERROR    | client       | API error -2019: Margin is insufficient.
+2026-05-10 08:21:07 | ERROR    | orders       | MARKET order FAILED | symbol=BTCUSDT side=BUY qty=0.01
+2026-05-10 08:21:07 | ERROR    | cli          | Order failed: [-2019] Margin is insufficient.
+2026-05-10 08:21:12 | INFO     | cli          | CLI request | symbol=BTCUSDT side=SELL type=LIMIT qty=0.01 price=97000.0 stop=None
+2026-05-10 08:21:12 | INFO     | orders       | Placing LIMIT SELL | symbol=BTCUSDT qty=0.01 price=97000.0 tif=GTC
+2026-05-10 08:21:12 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': 0.01, 'price': 97000.0, 'timeInForce': 'GTC', 'timestamp': 1778381472983}
+2026-05-10 08:21:14 | DEBUG    | client       | Response [400]: {"code":-2019,"msg":"Margin is insufficient."}
+2026-05-10 08:21:14 | ERROR    | client       | API error -2019: Margin is insufficient.
+2026-05-10 08:21:14 | ERROR    | orders       | LIMIT order FAILED | symbol=BTCUSDT side=SELL qty=0.01 price=97000.0
+2026-05-10 08:21:14 | ERROR    | cli          | Order failed: [-2019] Margin is insufficient.
+2026-05-10 08:21:25 | INFO     | cli          | CLI request | symbol=ETHUSDT side=SELL type=STOP_MARKET qty=0.1 price=None stop=3000.0
+2026-05-10 08:21:25 | INFO     | orders       | Placing STOP_MARKET SELL | symbol=ETHUSDT qty=0.1 stopPrice=3000.0
+2026-05-10 08:21:25 | DEBUG    | client       | POST https://testnet.binancefuture.com/fapi/v1/order payload={'symbol': 'ETHUSDT', 'side': 'SELL', 'type': 'STOP_MARKET', 'quantity': 0.1, 'stopPrice': 3000.0, 'timestamp': 1778381485715}
+2026-05-10 08:21:26 | DEBUG    | client       | Response [400]: {"code":-4120,"msg":"Order type not supported for this endpoint. Please use the Algo Order API endpoints instead."}
+2026-05-10 08:21:26 | ERROR    | client       | API error -4120: Order type not supported for this endpoint. Please use the Algo Order API endpoints instead.
+2026-05-10 08:21:26 | ERROR    | orders       | STOP_MARKET order FAILED | symbol=ETHUSDT side=SELL qty=0.1 stopPrice=3000.0
+2026-05-10 08:21:26 | ERROR    | cli          | Order failed: [-4120] Order type not supported for this endpoint. Please use the Algo Order API endpoints instead.
+2026-05-10 08:21:45 | DEBUG    | client       | GET https://testnet.binancefuture.com/fapi/v2/account params={'timestamp': 1778381505044, 'signature': '7027c260a2f76edacd6db81b7eb17cbecb3aacee2bf7db0dad62e8668224b5b8'}
+2026-05-10 08:21:45 | DEBUG    | client       | Response [200]: {"feeTier":0,"canTrade":true,"canDeposit":true,"canWithdraw":true,"feeBurn":true,"tradeGroupId":-1,"updateTime":0,"multiAssetsMargin":false,"totalInitialMargin":"0.00000000","totalMaintMargin":"0.00000000","totalWalletBalance":"0.00000000","totalUnrealizedProfit":"0.00000000","totalMarginBalance":"0.00000000","totalPositionInitialMargin":"0.00000000","totalOpenOrderInitialMargin":"0.00000000","totalCrossWalletBalance":"0.00000000","totalCrossUnPnl":"0.00000000","availableBalance":"0.00000000","maxWithdrawAmount":"0.00000000","assets":[{"asset":"FDUSD","walletBalance":"0.00000000","unrealizedPr
